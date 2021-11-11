@@ -9,7 +9,7 @@ import com.example.bluetoothdeviceexample.base.BaseAdapter
 import com.example.bluetoothdeviceexample.databinding.ItemBluetoothBinding
 
 class BluetoothAdapter(
-    items: ArrayList<BluetoothDevice>,
+    var items: ArrayList<BluetoothDevice>,
     private val ctx: Context,
 ) : BaseAdapter<BluetoothDevice>(ctx, items) {
     private val applicationInfos: List<BluetoothDevice> = items
@@ -26,6 +26,16 @@ class BluetoothAdapter(
 
         val model: BluetoothDevice = applicationInfos[position]
 
+        if (model.name != null){
+            binding.tvApp.text = model.name
+        }else{
+            binding.tvApp.text = model.address
+        }
         return binding.root
+    }
+
+    fun updateList(newItems: java.util.ArrayList<BluetoothDevice>) {
+        items = newItems
+        notifyDataSetChanged()
     }
 }

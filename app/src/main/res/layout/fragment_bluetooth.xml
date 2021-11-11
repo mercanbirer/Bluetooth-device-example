@@ -15,6 +15,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <ListView
+                android:id="@+id/lv_ble"
                 android:layout_width="@dimen/_120sdp"
                 android:layout_height="@dimen/_400sdp"
                 android:smoothScrollbar="true"
