@@ -26,6 +26,7 @@ class BluetoothFragment : BaseFragment<FragmentBluetoothBinding>(R.layout.fragme
     private val filters = IntentFilter(BluetoothDevice.ACTION_FOUND)
     private var bReciever: BroadcastReceiver? = null
     private val mDeviceList: ArrayList<String> = ArrayList()
+    val set = HashSet<BluetoothDevice>()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -59,14 +60,13 @@ class BluetoothFragment : BaseFragment<FragmentBluetoothBinding>(R.layout.fragme
                     val device =
                         intent.getParcelableExtra<BluetoothDevice>(BluetoothDevice.EXTRA_DEVICE)
                     device?.let {
-                        deviceItemList.add(device)
+                        set.add(device)
                         Log.e("dekmlf", deviceItemList.toString())
                     }
-                    blAdapter!!.notifyDataSetChanged()
+                    blAdapter!!.updateList(set)
                 }
             }
         }
-
 
         binding.lvBle.setOnItemClickListener { _, _, position, _ ->
             bTAdapter.cancelDiscovery()

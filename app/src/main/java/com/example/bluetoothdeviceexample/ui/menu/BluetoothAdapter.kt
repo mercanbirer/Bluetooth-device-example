@@ -34,8 +34,9 @@ class BluetoothAdapter(
         return binding.root
     }
 
-    fun updateList(newItems: java.util.ArrayList<BluetoothDevice>) {
-        items = newItems
+    fun updateList(newItems: HashSet<BluetoothDevice>) {
+        items.clear()
+        items.addAll(newItems)
         notifyDataSetChanged()
     }
 }
